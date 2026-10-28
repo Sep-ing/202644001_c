@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int main()
+{
+    int num;
+    scanf("%d", &num);
+
+    switch (num) {
+        case 1:
+            printf("dog");
+            break;
+        case 2:
+            printf("cat");
+            break;
+        case 3:
+            printf("chick");
+            break;
+        default:
+            printf("blank");
+            break;
+    }
+
+    return 0;
+}
