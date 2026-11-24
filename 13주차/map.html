@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>GPS Map</title>
+
+    <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="data.js"></script>
+</head>
+<body>
+    <h1>GPS 위치 표시</h1>
+
+    <div id="map" style="width:100%; height:600px;"></div>
+
+    <script>
+        const map = L.map("map").setView(
+            [gpsData[0].latitude, gpsData[0].longitude], 15
+        );
+
+        L.tileLayer(
+            "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+            { attribution: "© OpenStreetMap contributors" }
+        ).addTo(map);
+
+        const points = [];
+
+        gpsData.forEach(function(data) {
+            const point = [data.latitude, data.longitude];
+
+            L.marker(point)
+                .addTo(map)
+                .bindPopup(data.info);
+
+            points.push(point);
+        });
+
+        L.polyline(points, {color: "red"}).addTo(map);
+        map.fitBounds(points);
+    </script>
+</body>
+</html>
